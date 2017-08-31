@@ -1,0 +1,75 @@
+//
+//  LXSummary.pch
+//  LXDemoSummary
+//
+//  Created by zhongzhi on 2017/8/24.
+//  Copyright © 2017年 漫漫. All rights reserved.
+//
+
+#ifndef LXSummary_pch
+#define LXSummary_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define Device_Width  [[UIScreen mainScreen] bounds].size.width//获取屏幕宽高
+#define Device_Height [[UIScreen mainScreen] bounds].size.height
+#define LXColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
+
+//#define LBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define LXRandomColor LXColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256),1)
+
+#define  LXFont(f) [UIFont systemFontOfSize:(f)]
+
+
+#define KMainPath_Image(urlPath) [NSString stringWithFormat:@"%@%@%@", SERVER_PROTOCOL,SERVER_URL,urlPath]
+
+#define LXMainColor [UIColor hexStringToColor:@"5F98FC"]
+
+
+#define LXWS(weakSelf)  __weak __typeof(&*self)weakSelf = self
+
+#define LXKSystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]
+#define LXCurrentVersion  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define LXNotificationCenter [NSNotificationCenter defaultCenter]
+#define LXUserDefaults     [NSUserDefaults standardUserDefaults]
+#define NAVH 64
+#define TABBARH 49
+
+
+#define  LXScreenScale  Device_Width/375
+
+#define  REquestKey @"" //后台的公钥
+// 自定义 log
+#ifdef DEBUG
+#define NSLog(format, ...) NSLog((@"[%@] [Line %d] " format), [[[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__] componentsSeparatedByString:@"["][1] componentsSeparatedByString:@"]"][0], __LINE__, ##__VA_ARGS__)
+#else
+#define NSLog(...)
+#endif
+
+// 切换环境
+//#define DEV_ENV
+#define SERVER_PROTOCOL @"http://"
+#ifdef DEV_ENV
+//#define SERVER_URL @"119.28.62.27:8080/ytr/"  //测试环境
+#define SERVER_URL @"192.168.199.171:8080/ytr/"
+
+
+#else
+#define SERVER_URL @"119.28.62.27:8080/ytr/"  //正式环境
+#endif
+
+
+
+
+#import "UIView+Frame.h"
+#import "UILabel+LXLabel.h"
+#import "UIColor+Expanded.h"
+#import "UIButton+ImageTitleSpacing.h"
+
+#import "LxButton.h"
+#import "QBQuSegmentView.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import "LXTestBaseController.h"
+
+#endif /* LXSummary_pch */
